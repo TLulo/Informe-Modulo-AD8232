@@ -2,12 +2,6 @@
 ## Lectura del modulo ad8232
 El modulo parece detectar el movimiento del musculo "bicep"
 
-| CASO       | Min | Max |
-|------------|-----|-----|
-| Relajado   | Aprox 200 | < 340 |
-| Flexionado | > 340 | <390 |
-
-
 Estas visualizaciones son captadas gracias a un filtro pasa-bajo, 
 los datos en bruto no estaban reflejando diferencias notables en el musculo.
 
@@ -74,3 +68,8 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
     En los datos filtrados podemos observar diferencias.
     Podemos ver que el maximo del brazo estirado no pasa el minimo del brazo flexionado, lo cual refleja que puede ser una medicion correcta
     Destacar que el minimo y el maximo de cada una varia en 100 unidades, lo cual tiene sentido pues son senales no deberia ser algo tan discreto.
+
+| CASO       | Intervalo |
+|------------|-----|
+| Relajado   | 400 ~ 500 |
+| Flexionado | 500 ~ 600 |
