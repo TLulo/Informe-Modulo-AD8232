@@ -74,11 +74,14 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
     Podemos ver que el maximo del brazo estirado no pasa el minimo del brazo flexionado, lo cual refleja que puede ser una medicion correcta
     Destacar que el minimo y el maximo de cada una varia en 100 unidades, lo cual tiene sentido pues son senales no deberia ser algo tan discreto.
 
+    Esta medicion puede parecer correcta
+
 | CASO       | Intervalo |
 |------------|-----|
 | Relajado   | 400 ~ 500 |
 | Flexionado | 500 ~ 600 |
 
+----
 
 |Lugar      | Color    |
 |-----------|----------|
@@ -124,6 +127,15 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
 | Min       | 317      | 333              |
 | Max       | 360      | 343              |
 | Promedio  | 332,75   | 338,583333333333 |
+
+# Promedio sin filtrar
+
+    No se ve claramente la diferencia en las minimas y maximas del brazo contraido y estirado
+    Extranamente en el promedio podemos ver que el brazo contraido es menor que con el brazo estirado, no me convence como resultado, pues varian demasiado las senales dando como minimo 243 y maximo 648 con un intervalo de 400 unidades, lo cual no me genera confianza, luego, ademas las mediciones en brazo contraido estan entre 320 - 360 por lo que estan en medio de las otras mediciones
+ 
+# Filtrado 
+
+    Pasa algo similar al promedio de datos brutos, pues ante un extremo como tener el brazo estirado y el otro como tener el brazo totalmente contraido, los valores del contraido se encuentran en el intervalo del brazo estirado, por lo que o esta midiendo mal alguno de los dos o ambos.
 
 
 ----
@@ -173,7 +185,26 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
 | Max       | 372              | 299              |
 | Promedio  | 290,583333333333 | 275,166666666667 |
 
+# Promedio sin filtrar
+
+    Los datos del musculo contraido se encuentran en el intervalo del musculo estirado
+
+# Filtrado 
+
+    En los datos filtrados podemos observar diferencias.
+    Podemos ver que el maximo del brazo contraido pasa por poco (4 unidades) el minimo del brazo estirado, lo cual refleja que puede ser una medicion correcta
+    Destacar que el minimo y el maximo de cada una varia en 40 unidades maximo, lo cual tiene sentido pues son senales no deberia ser algo tan discreto.
+
+    Esta medicion puede parecer correcta
+
+| CASO       | Intervalo |
+|------------|-----|
+| Relajado   | 290 ~ 330 |
+| Flexionado | 250 ~ 300 |
+
+
 ----
+
 |Lugar      | Color    |
 |-----------|----------|
 | Musculo   | Amarillo |
@@ -217,7 +248,16 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
 | Max       | 650              | 530      |
 | Promedio  | 425,166666666667 | 486,75   |
 
+# Promedio sin filtrar
+
+    Los datos del musculo contraido se encuentran en el intervalo del musculo estirado, destacar que ambos tienen como maximo 650
+
+# Filtrado 
+
+    Los datos del musculo contraido se encuentran en el intervalo del musculo estirado, Destacar que pareciese que el intervalo fue "movido" aprox 25 unidades a la "derecha" pasando de un minimo de 460 -> 430 y un maximo de 555 -> 530
+
 ----
+
 |Lugar      | Color    |
 |-----------|----------|
 | Musculo   | Rojo     |
@@ -261,7 +301,16 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
 | Max       | 647      | 465      |
 | Promedio  | 393,5    | 434,5    |
 
+# Promedio sin filtrar
+
+    Los datos del musculo contraido se encuentran en el intervalo del musculo estirado, destacar que ambos tienen como maximo 647
+
+# Filtrado 
+
+    Los datos del musculo contraido se encuentran en el intervalo del musculo estirado, destacar que el minimo de ambos es similar 392 - 394
+
 ----
+
 |Lugar      | Color    |
 |-----------|----------|
 | Musculo   | Verde    |
@@ -304,3 +353,97 @@ A destacar: el Promedio hace referencia al promedio(valga la redundancia) de 100
 | Min       | 203              | 287              |
 | Max       | 360              | 317              |
 | Promedio  | 291,833333333333 | 300,583333333333 |
+
+
+# Promedio sin filtrar
+
+    Los datos del musculo contraido se encuentran en el intervalo del musculo estirado, destacar que ambos tienen como maximo 650
+
+# Filtrado 
+
+    En los datos filtrados podemos observar diferencias.
+    Podemos ver que el minimo del brazo contraido se encuentra por poco en el intervalo de el maximo del brazo estirado, lo cual refleja que puede ser una medicion correcta
+    Destacar que el minimo y el maximo de cada una varia en 30 unidades maximo, lo cual tiene sentido pues son senales no deberia ser algo tan discreto.
+
+    Esta medicion apunta a ser correcta aunque tiene cosas que me llaman la atencion para ser haber medido dos extremos
+
+    | CASO       | Intervalo |
+    |------------|-----|
+    | Relajado   | 253 ~ 300 |
+    | Flexionado | 290 ~ 320 |
+
+# Primera conclusion
+
+Descartaremos los datos que en ambos casos, se han entrelazado mucho las medicion del brazo estirado y contraido
+
+    Descartados:
+
+    #1
+
+|Lugar      | Color    |
+|-----------|----------|
+| Musculo   | Rojo     |
+| Invertido | Verde    |
+| Hueso     | Amarillo |
+
+    #2
+
+|Lugar      | Color    |
+|-----------|----------|
+| Musculo   | Amarillo |
+| Invertido | Rojo     |
+| Hueso     | Verde    |
+    
+    #3
+
+|Lugar      | Color    |
+|-----------|----------|
+| Musculo   | Rojo     |
+| Invertido | Amarillo |
+| Hueso     | Verde    |
+
+Hemos eliminado los que utilizaban el cable verde en el hueso, tiene sentido que ambos cumplan la misma caracteristica #2 y #3.
+
+Ademas aqui podemos observar que #1 y #3 comparten el cable rojo en el musculo por lo que podemos deducir que, al contrario de mi hipotesis, el rojo no se ubica en el musculo y el verde no se ubica en el hueso (tierra). 
+
+
+    Seleccionados:
+
+    #1
+
+|Lugar      | Color    |
+|-----------|----------|
+| Musculo   | Amarillo |
+| Invertido | Verde    |
+| Hueso     | Rojo     |
+
+| CASO       | Intervalo |
+|------------|-----|
+| Relajado   | 400 ~ 500 |
+| Flexionado | 500 ~ 600 |
+
+    #2
+
+|Lugar      | Color    |
+|-----------|----------|
+| Musculo   | Verde    |
+| Invertido | Rojo     |
+| Hueso     | Amarillo |
+
+| CASO       | Intervalo |
+|------------|-----|
+| Relajado   | 290 ~ 330 |
+| Flexionado | 250 ~ 300 |
+
+    #3
+
+|Lugar      | Color    |
+|-----------|----------|
+| Musculo   | Verde    |
+| Invertido | Amarillo |
+| Hueso     | Rojo     |
+
+| CASO       | Intervalo |
+|------------|-----|
+| Relajado   | 253 ~ 300 |
+| Flexionado | 290 ~ 320 |
